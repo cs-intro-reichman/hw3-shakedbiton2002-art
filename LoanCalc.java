@@ -49,7 +49,7 @@ public class LoanCalc {
 		}
 
 		
-		return G;
+		return G - epsilon ;
     }
     
     public static double bisectionSolver(double loan, double rate, int n, double epsilon) { 
@@ -77,4 +77,4 @@ public class LoanCalc {
 
     return G;
 }
-}
+} // תרגיל קשה מוות 
