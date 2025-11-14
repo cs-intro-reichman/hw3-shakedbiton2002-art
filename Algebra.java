@@ -25,43 +25,90 @@ public class Algebra {
 
 	// Returns x1 + x2
 	public static int plus(int x1, int x2) {
-		// Replace the following statement with your code
-		return 0;
+		int a = x1;
+		int b = x2;
+		int sum = a;
+		for (int i = 1; i <= b; i++) {
+			sum = sum + 1;
+		}
+		return sum ;
 	}
 
 	// Returns x1 - x2
 	public static int minus(int x1, int x2) {
-		// Replace the following statement with your code
-		return 0;
+		int a = x1;
+		int b = x2;
+		int diff = a;
+		for (int i = 1; i <= b; i++) {
+			diff = diff - 1;
+		}
+		return diff ;
 	}
 
 	// Returns x1 * x2
 	public static int times(int x1, int x2) {
-		// Replace the following statement with your code
-		return 0;
+		int a = x1;
+		int b = x2;
+		int T = 0;
+		for (int i = 1; i <= b; i++) {
+			T = plus(T, a);
+		}
+		return T ;
 	}
 
-	// Returns x^n (for n >= 0)
+	
 	public static int pow(int x, int n) {
-		// Replace the following statement with your code
-		return 0;
+		int a = x;
+		int b = n;
+		int P = 1;
+		for (int i = 1; i <= b; i++) {
+			P = times(P, a);
+		}
+
+		return P ;
 	}
 
 	// Returns the integer part of x1 / x2 
 	public static int div(int x1, int x2) {
-		// Replace the following statement with your code
-		return 0;
+		int a = x1;
+		int b = x2;
+		int count = 0;
+		int sum ; 
+		if (b == 0) {
+			throw new IllegalArgumentException("Division by zero"); // חילוק ב - 0
+		}
+		for (sum = b ; sum <= a; sum = plus(sum, b)) {
+			count = plus(count, 1);
+		}
+		return count ;
 	}
 
-	// Returns x1 % x2
+	
 	public static int mod(int x1, int x2) {
-		// Replace the following statement with your code
-		return 0;
+		int a = x1;
+		int b = x2;
+		int Re = a;
+		if (b == 0) {
+			throw new IllegalArgumentException("Division by zero"); // חילוק ב - 0 
+		}
+		while (Re >= b) {
+			Re = minus(Re, b);
+		}
+		return Re ;
 	}	
 
-	// Returns the integer part of sqrt(x) 
+	
 	public static int sqrt(int x) {
-		// Replace the following statement with your code
-		return 0;
+		int a = x;
+		if (a < 0) {
+			throw new IllegalArgumentException("Square root of negative number"); // שורש ריבועי של מספר שלילי
+		}
+		int i = 0;
+		int sq = 0;
+		while (sq <= a) {
+			i = plus(i, 1);
+			sq = times(i, i);
+		}
+		return minus(i, 1) ;
 	}	  	  
 }
