@@ -41,16 +41,17 @@ public class LoanCalc {
 
 	
     public static double bruteForceSolver(double loan, double rate, int n, double epsilon) {
-		double G = loan / n ; 
-		iterationCounter = 0;
-		while (endBalance(loan, rate, n, G) > 0  ){
-			G = G + epsilon ;
-			iterationCounter = iterationCounter + 1 ;
-		}
+    double G = loan * (1 + (rate / 100.0)) / n; // התחלה חכמה יותר
+    iterationCounter = 0;
 
-		
-		return G - epsilon ;
+    while (endBalance(loan, rate, n, G) > 0) {
+        G += epsilon;
+        iterationCounter++;
     }
+
+    return G - epsilon;
+}
+
     
     public static double bisectionSolver(double loan, double rate, int n, double epsilon) { 
     iterationCounter = 0; //איפוס מספור האינטרקציות 
