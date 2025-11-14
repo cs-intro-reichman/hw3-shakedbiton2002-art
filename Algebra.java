@@ -25,43 +25,132 @@ public class Algebra {
 
 	// Returns x1 + x2
 	public static int plus(int x1, int x2) {
-		// Replace the following statement with your code
-		return 0;
+		int a = x1;
+		int b = x2;
+		int sum = a;
+		if (b >= 0) {
+			for (int i = 1; i <= b; i++) {
+			sum = sum + 1;
+		}
+	}	else {
+			for (int i = b; i < 0; i++) {
+			sum = sum - 1;
+		}
+		
 	}
+		return sum ;
+}
 
-	// Returns x1 - x2
-	public static int minus(int x1, int x2) {
-		// Replace the following statement with your code
-		return 0;
-	}
 
-	// Returns x1 * x2
-	public static int times(int x1, int x2) {
-		// Replace the following statement with your code
-		return 0;
-	}
+	public static int minus(int a, int b) {
+    return plus(a, -b);
+}
 
-	// Returns x^n (for n >= 0)
+	
+	public static int times(int a, int b) {
+    boolean negative = false;
+
+    if (a < 0) {
+        a = minus(0, a);
+        negative = !negative;
+    }
+    if (b < 0) {
+        b = minus(0, b);
+        negative = !negative;
+    }
+
+    int result = 0;
+
+    for (int i = 0; i < b; i++) {
+        result = plus(result, a);
+    }
+
+    if (negative) {
+        result = minus(0, result);
+    }
+
+    return result;
+}
+
+	
 	public static int pow(int x, int n) {
-		// Replace the following statement with your code
-		return 0;
+		int a = x;
+		int b = n;
+		if (b < 0) {
+			throw new IllegalArgumentException("Negative exponent"); // מעריך שלילי
+		}
+		int P = 1;
+		for (int i = 1; i <= b; i++) {
+			P = times(P, a);
+		}
+
+		return P ;
 	}
 
 	// Returns the integer part of x1 / x2 
 	public static int div(int x1, int x2) {
-		// Replace the following statement with your code
-		return 0;
+		int a = x1;
+		int b = x2;
+		boolean negative = false;
+		if (a < 0) {
+			a = minus(0, a);
+			negative = !negative;
+		}
+		if (b < 0) {
+			b = minus(0, b);
+			negative = !negative;
+		}
+		int count = 0;
+		int sum ; 
+		if (b == 0) {
+			throw new IllegalArgumentException("Division by zero"); // חילוק ב - 0
+		}
+		for (sum = b ; sum <= a; sum = plus(sum, b)) {
+			count = plus(count, 1);
+		}
+		if (negative) {
+			count = minus(0, count);
+		}	
+		return count ;
 	}
 
-	// Returns x1 % x2
+	
 	public static int mod(int x1, int x2) {
-		// Replace the following statement with your code
-		return 0;
+		int a = x1;
+		int b = x2;
+		boolean negative = false;
+		if (a < 0) {
+			a = minus(0, a);
+			negative = true;
+		}
+		if (b < 0) {
+			b = minus(0, b);
+		}
+		int Re = a;
+		if (b == 0) {
+			throw new IllegalArgumentException("Division by zero"); // חילוק ב - 0 
+		}
+		while (Re >= b) {
+			Re = minus(Re, b);
+		}
+		if (negative) {
+			Re = minus(0, Re);
+		}
+		return Re ;
 	}	
 
-	// Returns the integer part of sqrt(x) 
+	
 	public static int sqrt(int x) {
-		// Replace the following statement with your code
-		return 0;
+		int a = x;
+		if (a < 0) {
+			throw new IllegalArgumentException("Square root of negative number"); // שורש ריבועי של מספר שלילי
+		}
+		int i = 0;
+		int sq = 0;
+		while (sq <= a) {
+			i = plus(i, 1);
+			sq = times(i, i);
+		}
+		return minus(i, 1) ;
 	}	  	  
 }
