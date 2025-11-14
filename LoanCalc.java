@@ -26,15 +26,15 @@ public class LoanCalc {
 	}
 
 	
-	private static double endBalance(double loan, double rate, int n, double payment) {
-		double B = loan;
-		for (int i = 1 ; i <= n ; i++) {
-			B = B - payment;
-			B  = B * (1 + rate );
-		}
+	public static double endBalance(double loan, double rate, int n, double G) {
+    double balance = loan;
+    double r = rate / 100;   
+    for (int i = 0; i < n; i++) {
+        balance = balance * (1 + r) - G;
+    }
+    return balance;
+}
 
-		return B;
-	}
 	
     public static double bruteForceSolver(double loan, double rate, int n, double epsilon) {
 		double G = loan / n ; 
