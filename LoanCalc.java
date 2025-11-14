@@ -27,36 +27,38 @@ public class LoanCalc {
 
 	
 	public static double endBalance(double loan, double rate, int n, double payment) {
-        double balance = loan;
-        double r = (rate / 100.0) / 12.0; 
+    double balance = loan;
+    double r = (rate / 100.0) / 12.0; 
 
-        for (int i = 0; i < n; i++) {
-            balance = balance * (1 + r) - payment;
-        }
-
-        return balance;
+    for (int i = 0; i < n; i++) {
+        balance = balance * (1 + r) - payment;
     }
 
+    return balance;
+}
 
 
-	
-    public static double bruteForceSolver(double loan, double rate, int n, double epsilon) {
-    double G = loan * (1 + (rate / 100.0)) / n; // התחלה חכמה יותר
+
+public static double bruteForceSolver(double loan, double rate, int n, double epsilon) {
+    double G = epsilon; 
     iterationCounter = 0;
 
+   
     while (endBalance(loan, rate, n, G) > 0) {
         G += epsilon;
         iterationCounter++;
     }
 
-    return G - epsilon;
+    
+    return G; 
 }
 
-    
-    public static double bisectionSolver(double loan, double rate, int n, double epsilon) { 
+// ----------------------------------------------------
+
+public static double bisectionSolver(double loan, double rate, int n, double epsilon) { 
     iterationCounter = 0; //איפוס מספור האינטרקציות 
-    double L = loan / n;    
-    double H = loan;      
+    double L = loan / n; 
+    double H = loan; 
     double G = (L + H) / 2;
 
     while ((H - L) > epsilon) {
@@ -73,9 +75,9 @@ public class LoanCalc {
             H = G;
         }
 
-        G = (L + H) / 2;  // נקודת אמצע חדשה
+        G = (L + H) / 2; // נקודת אמצע חדשה
     }
 
     return G;
 }
-} // תרגיל קשה מוות 
+}
