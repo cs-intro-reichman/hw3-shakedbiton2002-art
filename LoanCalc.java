@@ -28,7 +28,8 @@ public class LoanCalc {
 	
 	public static double endBalance(double loan, double rate, int n, double G) {
     double balance = loan;
-    double r = rate / 100;   
+
+    double r = (rate / 100.0) / 12.0; 
     for (int i = 0; i < n; i++) {
         balance = balance * (1 + r) - G;
     }
