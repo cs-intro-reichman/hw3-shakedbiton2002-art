@@ -49,20 +49,28 @@ public class LoanCalc {
     }
     
     public static double bisectionSolver(double loan, double rate, int n, double epsilon) { 
-		int iterationCounter = 0 ;
-		double L = loan / n ;
-		double H  = loan  ;
-		double G = (L + H) / 2 ;
-		while (H - L > epsilon ) {
-			iterationCounter = iterationCounter + 1 ;
-			if (endBalance(loan, rate, n, G) * endBalance(loan , rate , n , L) > 0 ) {
-				L = G ;
-			} else {
-				H = G ;
-			}
-			G = (L + H) / 2 ;
-		}
+    iterationCounter = 0; //איפוס מספור האינטרקציות 
+    double L = loan / n;    // f(L) > 0
+    double H = loan;        // f(H) < 0
+    double G = (L + H) / 2;
 
-		return G ;
+    while ((H - L) > epsilon) {
+
+        double fL = endBalance(loan, rate, n, L);
+        double fG = endBalance(loan, rate, n, G);
+
+        iterationCounter++;
+
+        
+        if (fG * fL > 0) {
+            L = G;
+        } else {
+            H = G;
+        }
+
+        G = (L + H) / 2;  // נקודת אמצע חדשה
     }
+
+    return G;
+}
 }
