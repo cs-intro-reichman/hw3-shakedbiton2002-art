@@ -1,49 +1,89 @@
-/** Functions for checking if a given string is an anagram. */
+// Source code is decompiled from a .class file using FernFlower decompiler (from Intellij IDEA).
 public class Anagram {
-	public static void main(String args[]) {
-		// Tests the isAnagram function.
-		System.out.println(isAnagram("silent","listen"));  // true
-		System.out.println(isAnagram("William Shakespeare","I am a weakish speller")); // true
-		System.out.println(isAnagram("Madam Curie","Radium came")); // true
-		System.out.println(isAnagram("Tom Marvolo Riddle","I am Lord Voldemort")); // true
+   public Anagram() {
+   }
 
-		// Tests the preProcess function.
-		System.out.println(preProcess("What? No way!!!"));
-		
-		// Tests the randomAnagram function.
-		System.out.println("silent and " + randomAnagram("silent") + " are anagrams.");
-		
-		// Performs a stress test of randomAnagram 
-		String str = "1234567";
-		Boolean pass = true;
-		//// 10 can be changed to much larger values, like 1000
-		for (int i = 0; i < 10; i++) {
-			String randomAnagram = randomAnagram(str);
-			System.out.println(randomAnagram);
-			pass = pass && isAnagram(str, randomAnagram);
-			if (!pass) break;
-		}
-		System.out.println(pass ? "test passed" : "test Failed");
-	}  
+   public static void main(String[] var0) {
+      System.out.println(isAnagram("silent", "listen"));
+      System.out.println(isAnagram("William Shakespeare", "I am a weakish speller"));
+      System.out.println(isAnagram("Madam Curie", "Radium came"));
+      System.out.println(isAnagram("Tom Marvolo Riddle", "I am Lord Voldemort"));
+      System.out.println(preProcess("What? No way!!!"));
+      System.out.println("silent and " + randomAnagram("silent") + " are anagrams.");
+      String var1 = "1234567";
+      Boolean var2 = true;
 
-	// Returns true if the two given strings are anagrams, false otherwise.
-	public static boolean isAnagram(String str1, String str2) {
-		// Replace the following statement with your code
-		return false;
-	}
-	   
-	// Returns a preprocessed version of the given string: all the letter characters are converted
-	// to lower-case, and all the other characters are deleted, except for spaces, which are left
-	// as is. For example, the string "What? No way!" becomes "whatnoway"
-	public static String preProcess(String str) {
-		// Replace the following statement with your code
-		return "";
-	} 
-	   
-	// Returns a random anagram of the given string. The random anagram consists of the same
-	// characters as the given string, re-arranged in a random order. 
-	public static String randomAnagram(String str) {
-		// Replace the following statement with your code
-		return "";
-	}
+      for(int var3 = 0; var3 < 10; ++var3) {
+         String var4 = randomAnagram(var1);
+         System.out.println(var4);
+         var2 = var2 && isAnagram(var1, var4);
+         if (!var2) {
+            break;
+         }
+      }
+
+      System.out.println(var2 ? "test passed" : "test Failed");
+   }
+
+   public static boolean isAnagram(String var0, String var1) {
+      String var2 = preProcess(var0);
+      String var3 = preProcess(var1);
+      if (var2.length() != var3.length()) {
+         return false;
+      } else {
+         int[] var4 = new int[26];
+
+         int var6;
+         int var7;
+         for(int var5 = 0; var5 < var2.length(); ++var5) {
+            var6 = var2.charAt(var5);
+            var7 = var3.charAt(var5);
+            ++var4[var6 - 97];
+            --var4[var7 - 97];
+         }
+
+         int[] var9 = var4;
+         var6 = var4.length;
+
+         for(var7 = 0; var7 < var6; ++var7) {
+            int var8 = var9[var7];
+            if (var8 != 0) {
+               return false;
+            }
+         }
+
+         return true;
+      }
+   }
+
+   public static String preProcess(String var0) {
+      String var1 = "";
+
+      for(int var2 = 0; var2 < var0.length(); ++var2) {
+         char var3 = var0.charAt(var2);
+         if (var3 >= 'A' && var3 <= 'Z') {
+            var3 = (char)(var3 + 32);
+         }
+
+         if (var3 >= 'a' && var3 <= 'z') {
+            var1 = var1 + var3;
+         }
+      }
+
+      return var1;
+   }
+
+   public static String randomAnagram(String var0) {
+    String str1 = preProcess(var0);
+    String newstr = "";
+    
+    // כל עוד יש תווים במחרוזת המקורית
+    while (str1.length() > 0) {
+        int index = (int)(Math.random() * str1.length());
+        newstr = newstr + str1.charAt(index);
+        str1 = str1.substring(0, index) + str1.substring(index + 1);
+    }
+    return newstr;
+
+   }
 }
