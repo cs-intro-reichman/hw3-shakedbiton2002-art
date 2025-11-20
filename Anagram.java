@@ -57,21 +57,29 @@ public class Anagram {
    }
 
    public static String preProcess(String var0) {
-      String var1 = "";
+    StringBuilder sb = new StringBuilder();
 
-      for(int var2 = 0; var2 < var0.length(); ++var2) {
-         char var3 = var0.charAt(var2);
-         if (var3 >= 'A' && var3 <= 'Z') {
-            var3 = (char)(var3 + 32);
-         }
+    for (int i = 0; i < var0.length(); i++) {
+        char c = var0.charAt(i);
 
-         if (var3 >= 'a' && var3 <= 'z') {
-            var1 = var1 + var3;
-         }
-      }
+        // אות גדולה → אות קטנה
+        if (c >= 'A' && c <= 'Z') {
+            c = (char)(c + 32);
+        }
 
-      return var1;
-   }
+        // אם זה אות קטנה → נשמור
+        if (c >= 'a' && c <= 'z') {
+            sb.append(c);
+
+        // אם זה רווח → משאירים!
+        } else if (c == ' ') {
+            sb.append(' ');
+        }
+    }
+
+    return sb.toString();
+}
+
 
    public static String randomAnagram(String var0) {
     String str1 = preProcess(var0);
